@@ -11,7 +11,6 @@ Proyecto base Laravel 10 integrado con Azure Blob Storage y preparado para desar
    ```bash
     git clone https://github.com/tu_usuario/azure-blob-storage.git
     cd azure-blob-storage
-
     
 
 2. Copia tu archivo de variables de entorno
@@ -63,7 +62,6 @@ Y agrega tus credenciales de Azure Blob:
 Endpoint de ejemplo
 Se incluye un endpoint en el controlador AzureBlobController para probar la subida:
 
-    ```bash
     POST /upload
     Parámetros:
     file (form-data): Archivo a subir
