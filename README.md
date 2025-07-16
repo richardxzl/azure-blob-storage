@@ -1,6 +1,6 @@
-# Azure Blob Storage + Laravel 11 + Docker
+# Azure Blob Storage + Laravel 12 + Docker
 
-Proyecto base Laravel 11 integrado con Azure Blob Storage y preparado para desarrollo con Docker.
+Proyecto base Laravel 12 integrado con Azure Blob Storage y preparado para desarrollo con Docker.
 
 ---
 
