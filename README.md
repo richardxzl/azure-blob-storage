@@ -1,71 +1,77 @@
-<<<<<<< HEAD
-# azure-blob-storage
-Azure Blob Storage en Laravel
-=======
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Azure Blob Storage + Laravel 10 + Docker
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Proyecto base Laravel 10 integrado con Azure Blob Storage y preparado para desarrollo con Docker.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Levantar el proyecto con Docker
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **Clona el repositorio**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+   ```bash
+    git clone https://github.com/tu_usuario/azure-blob-storage.git
+    cd azure-blob-storage
 
-## Learning Laravel
+    
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. Copia tu archivo de variables de entorno
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    ```bash
+    cp .env.example .env
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Modifica las variables de tu .env
 
-## Laravel Sponsors
+    ```bash
+    DB_CONNECTION=mysql
+    DB_HOST=db
+    DB_PORT=3306
+    DB_DATABASE=laravel
+    DB_USERNAME=laravel
+    DB_PASSWORD=laravel
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Y agrega tus credenciales de Azure Blob:
 
-### Premium Partners
+    ```bash
+    AZURE_STORAGE_ACCOUNT_NAME=your_account_name
+    AZURE_STORAGE_ACCOUNT_KEY=your_account_key
+    AZURE_STORAGE_CONTAINER=your_container
+    AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=your_account_name;AccountKey=your_account_key;EndpointSuffix=core.windows.net"
+    Levanta los contenedores
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+4. Levanta los contenedores
 
-## Contributing
+    ```bash
+    docker-compose up --build -d
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. Instala las dependencias de Laravel
 
-## Code of Conduct
+    ```bash
+    docker-compose exec app composer install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+6. Genera la key de la app
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    ```bash
+    docker-compose exec app php artisan key:generate
 
-## License
+7. Accede a la app
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
->>>>>>> cde7e0b (Primer commit: Proyecto Laravel 10 dockerizado con integración Azure Blob)
+    http://localhost:8000
+
+
+📂 Subir un archivo a Azure Blob Storage
+Endpoint de ejemplo
+Se incluye un endpoint en el controlador AzureBlobController para probar la subida:
+
+    ```bash
+    POST /upload
+    Parámetros:
+    file (form-data): Archivo a subir
+
+Ejemplo con Postman:
+    1) Selecciona método POST
+    2) URL: http://localhost:8000/upload
+    3) En Body selecciona form-data
+    4) Agrega un campo llamado file y selecciona cualquier archivo
+    5) Haz clic en Enviar
+    6) Si la subida es exitosa, recibirás un JSON con la URL o path en Azure.
